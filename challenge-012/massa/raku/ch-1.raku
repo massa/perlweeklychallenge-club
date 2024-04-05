@@ -32,7 +32,8 @@ Rosenfeld..
 use v6.*;
 
 sub SOLUTION() {
-  ^∞ ==> grep &is-prime ==> produce &[*] ==> map {$_+1} ==> first {!.is-prime}
+  # ^∞ ==> grep &is-prime ==> produce &[*] ==> map *.succ ==> first !*.is-prime
+  first !*.is-prime, map *.succ, [\*] grep &is-prime, ^∞
 }
 
 multi MAIN (Bool :$test!) {

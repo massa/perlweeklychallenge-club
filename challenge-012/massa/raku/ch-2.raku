@@ -33,8 +33,9 @@ Write a script to return the merged items.
 use v6.*;
 
 sub SOLUTION(*@paths is copy) {
-  my @parts = map { last unless [eq] $_[]; $_[0] }, [Z] (@paths ==> map {$*SPEC.splitdir: .IO});
-  $*SPEC.catdir: @parts
+  my &dirsplit = { $*SPEC.splitdir: .IO }
+  my &dircat = { $*SPEC.catdir: @^paths }
+  dircat map { last unless [eq] $_[]; .[0] }, [Z] @paths».&dirsplit
 }
 
 multi MAIN (Bool :$test!) {
